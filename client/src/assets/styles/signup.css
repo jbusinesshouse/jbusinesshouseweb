@@ -1,0 +1,43 @@
+.signup {
+    min-height: 100vh;
+}
+
+.signForm {
+    padding: 60px 0;
+}
+.signForm form {
+    width: 100%;
+}
+.signInpItem {
+    width: 100%;
+    margin-bottom: 40px;
+}
+.signInpItem label {
+    font-size: 15px;
+    color: #8f8f8f;
+    display: block;
+    margin-bottom: 5px;
+}
+.signInpItem input {
+    width: 100%;
+    height: 45px;
+    padding: 0 15px;
+    border: 1px solid #dadada;
+    outline: none;
+}
+
+.signInpItem.signInpImgItem input {
+    width: fit-content;
+    height: fit-content;
+    padding: 0;
+    border: none;
+}
+
+.signForm form button {
+    width: 300px;
+    height: 55px;
+    border: 1px solid #dadada;
+    background-color: #1346af;
+    color: #fff;
+    font-size: 17px;
+}

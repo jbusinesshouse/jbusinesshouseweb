@@ -1,0 +1,187 @@
+.checkoutWrap {
+    padding: 60px 0;
+}
+
+.checkoutWrap .container {
+    display: flex;
+}
+
+.checkLeft {
+    width: 60%;
+    padding-right: 20px;
+}
+
+.checkLeft h2 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.checkLeft form {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.checkInp {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.checkInp label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.checkInp input,
+.checkInp select {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #dadada;
+    outline: none;
+    padding: 0 10px;
+}
+
+
+
+
+
+.deliveryWrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.deliveryWrap p {
+    font-size: 16px;
+    color: #8f8f8f;
+}
+
+
+
+.placeOrderBtn {
+    width: 300px;
+    height: 55px;
+    border: 1px solid #dadada;
+    background-color: #1346af;
+    color: #fff;
+    font-size: 17px;
+}
+
+
+
+
+
+
+
+.checkRight {
+    width: 40%;
+    padding-left: 20px;
+}
+
+.checkRight h2 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #8f8f8f;
+    margin-bottom: 10px;
+}
+
+
+.orderSumWrap {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.orderSumLeft {
+    width: 60px;
+    height: 60px;
+}
+
+.orderSumLeft img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.orderSumRight {
+    width: calc(100% - 75px);
+}
+
+.orderSumRight h3 {
+    font-size: 15px;
+    font-weight: 400;
+    color: #8f8f8f;
+    margin-bottom: 5px;
+}
+
+.orderSumRight h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #8f8f8f;
+    margin-bottom: 5px;
+}
+
+.orderSumRight p {
+    font-size: 15px;
+    font-weight: 400;
+    color: #8f8f8f;
+    margin-bottom: 5px;
+}
+
+
+.checkCalRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 5px;
+    border-bottom: 1px solid #dadada;
+}
+
+.checkCalRow:first-child {
+    border-top: 1px solid #dadada;
+}
+
+.checkCalRow p {
+    font-size: 15px;
+    color: #8f8f8f;
+}
+
+.checkCalRow h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #8f8f8f;
+}
+
+
+.checkTotal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 5px;
+}
+.checkTotal h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #8f8f8f;
+}
+
+
+
+
+
+@media (max-width: 750px) {
+    .checkoutWrap .container {
+        flex-direction: column-reverse;
+    }
+    .checkLeft {
+        width: 100%;
+        padding-right: 0;
+    }
+    .checkRight {
+        width: 100%;
+        padding-left: 0;
+        margin-bottom: 40px;
+    }
+}

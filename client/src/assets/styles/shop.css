@@ -1,0 +1,69 @@
+.shopProducts {
+    padding: 60px 0;
+}
+
+.shopHeading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.shopHeading h3 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #8f8f8f;
+}
+
+.shopHeading select {
+    width: 200px;
+    border: 1px solid #bbbbbb;
+    outline: none;
+    padding: 5px 10px;
+    color: #8f8f8f;
+}
+
+
+
+
+
+
+.paginationWrap {
+    padding-bottom: 60px;
+}
+.paginationWrap ul {
+    width: 100%;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #015866;
+    border-radius: 10px;
+}
+.paginationWrap ul li a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 5px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.paginationWrap ul li.selected a {
+    color: #9dbdc2;
+    border: 1px solid #9dbdc2;
+}
+
+
+.paginationWrap ul li:first-child a {
+    width: fit-content;
+    height: fit-content;
+    border-radius: unset;
+}
+.paginationWrap ul li:last-child a {
+    width: fit-content;
+    height: fit-content;
+    border-radius: unset;
+}

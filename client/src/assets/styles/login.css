@@ -1,0 +1,36 @@
+.login {
+    min-height: 100vh;
+}
+
+.logForm {
+    padding: 60px 0;
+}
+.logForm form {
+    width: 100%;
+}
+.logInpItem {
+    width: 100%;
+    margin-bottom: 40px;
+}
+.logInpItem label {
+    font-size: 15px;
+    color: #8f8f8f;
+    display: block;
+    margin-bottom: 5px;
+}
+.logInpItem input {
+    width: 100%;
+    height: 45px;
+    padding: 0 15px;
+    border: 1px solid #dadada;
+    outline: none;
+}
+
+.logForm form button {
+    width: 300px;
+    height: 55px;
+    border: 1px solid #dadada;
+    background-color: #1346af;
+    color: #fff;
+    font-size: 17px;
+}

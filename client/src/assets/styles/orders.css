@@ -1,0 +1,135 @@
+.orderMain {
+    padding: 60px 0;
+}
+.orderMain h2 {
+    font-size: 35px;
+    font-weight: 600;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+
+
+
+.singleOrder {
+    width: 100%;
+    height: 190px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    overflow: hidden;
+    border-radius: 15px;
+    border: 1.5px solid #e2e2e2;
+    position: relative;
+}
+.singleOrder img {
+    width: 200px;
+    height: 100%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+.orderText {
+    width: calc(100% - 410px);
+}
+.orderText h3 {
+    font-size: 19px;
+    font-weight: 500;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.orderText h4 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #707070;
+}
+.orderText h4 span {
+    font-weight: 600;
+}
+
+.orderText p {
+    color: #707070;
+}
+.orderText p span {
+    font-weight: 600;
+}
+
+
+
+
+
+.orderCompleted {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+.completeToggle {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.completeToggle label {
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.completeToggle input {
+    width: 17px;
+    height: 17px;
+}
+
+
+.orderCompleted .pending {
+    color: #ff8800;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.orderCompleted .completed {
+    color: green;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+
+
+
+@media (max-width: 750px) {
+    .userOrderWrap {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .singleOrder {
+        width: 250px;
+        height: fit-content;
+        flex-direction: column;
+        margin: 10px;
+        padding-bottom: 85px;
+    }
+    .singleOrder img {
+        width: 100%;
+        height: 200px;
+        margin-right: 0;
+    }
+    .orderText {
+        width: 100%;
+        padding: 10px;
+    }
+
+
+    .orderCompleted {
+        width: calc(100% - 20px);
+        transform: unset;
+        right: unset;
+        top: unset;
+        left: 10px;
+        bottom: 10px;
+    }
+}

@@ -1,0 +1,105 @@
+.productUpWrap {
+    padding: 60px 0;
+}
+
+.productUpWrap h1 {
+    font-size: 38px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+
+.productUpWrap form {
+    width: 100%;
+}
+
+.proUpInp {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.proUpInp label {
+    font-size: 15px;
+    color: #8f8f8f;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.proUpInp input, .proUpInp select {
+    width: 100%;
+    height: 45px;
+    padding: 0 15px;
+    border: 1px solid #dadada;
+    outline: none;
+}
+
+.proUpInp textarea {
+    width: 100%;
+    height: 150px;
+    padding: 15px;
+    border: 1px solid #dadada;
+    outline: none;
+}
+
+.proUpInp.proUpImgInp input {
+    width: fit-content;
+    height: fit-content;
+    border: none;
+    padding: 0;
+}
+.proSizePre {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.proSizePre span {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    padding: 5px 8px;
+    border: 1px solid #dadada;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #8f8f8f;
+}
+
+.proSizePre span img {
+    width: 12px;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.proPrevImg {
+    width: 300px;
+    height: 400px;
+    object-fit: contain;
+    display: block;
+}
+
+
+.wholeSaleCon {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.wholeSaleCon input {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+
+
+
+
+
+.productUpWrap form button {
+    width: 300px;
+    height: 55px;
+    border: 1px solid #dadada;
+    background-color: #1346af;
+    color: #fff;
+    font-size: 17px;
+}

@@ -1,0 +1,99 @@
+.banner {
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../images/businessmans.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 160px 0;
+}
+
+.bannerText {
+    max-width: 700px;
+}
+
+.bannerText h3 {
+    font-size: 18px;
+    font-weight: 400;
+    color: #FF7F84;
+    margin-bottom: 20px;
+}
+
+.bannerText h1 {
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 1.23em;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+
+.bannerText a {
+    display: block;
+    width: fit-content;
+    padding: 10px 20px;
+    background-color: #FF7F84;
+    color: #fff;
+    border: none;
+}
+
+
+
+
+
+.featured, .allProducts {
+    padding: 60px 0;
+}
+
+.featured h2, .allProducts h2 {
+    font-size: 30px;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+
+.productWrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+
+
+.seeAllBtn {
+    width: fit-content;
+    padding: 10px 20px;
+    border: none;
+    background-color: #015866;
+    color: #fff;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+
+
+
+
+
+@media (max-width: 1000px) {
+    .banner {
+        padding: 120px 0;
+    }
+}
+
+@media (max-width: 700px) {
+    .banner {
+        padding: 80px 0;
+    }
+
+    .bannerText h1 {
+        font-size: 47px;
+        line-height: 1.1em;
+    }
+    .featured, .allProducts {
+        padding: 25px 0;
+    }
+    .featured h2, .allProducts h2 {
+        font-size: 24px;
+    }
+}
