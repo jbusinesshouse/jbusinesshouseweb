@@ -60,5 +60,5 @@ app.use("/order", orderRoute)
 
 
 
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 4004
 app.listen(port, () => console.log(`Server running at port ${port}`))
