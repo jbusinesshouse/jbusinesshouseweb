@@ -7,6 +7,7 @@ const userRoute = require("./routes/users")
 const authRoute = require("./routes/auth")
 const productRoute = require("./routes/products")
 const orderRoute = require("./routes/orders")
+const fs = require("fs");
 
 const app = express()
 
@@ -14,13 +15,16 @@ app.use(express.json())
 app.use(cors({ origin: "*" }))
 dotenv.config()
 
+// Configure multer storage with folder creation logic
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        // Specify the directory where you want to store uploaded files
+        // Check if the upload folder exists
+        if (!fs.existsSync("uploads")) {
+            fs.mkdirSync("uploads", { recursive: true }); // Create folder if necessary
+        }
         cb(null, "uploads/");
     },
     filename: function (req, file, cb) {
-        // Generate a unique filename for the uploaded file
         cb(null, file.originalname);
     },
 });
