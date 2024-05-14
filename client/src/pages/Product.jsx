@@ -43,7 +43,10 @@ const Product = () => {
     }
 
     const handleBuy = () => {
-        if (selectedSize) {
+        if (selectedSize && productData.disPrice && productData.disPrice > 0) {
+            localStorage.setItem("selectedProduct", JSON.stringify({ product: { ...productData }, selectedSize, quantity }))
+            navigate(`/checkout/${productId}`)
+        } else if (selectedSize && quantity >= productData.wholeMinQuan) {
             localStorage.setItem("selectedProduct", JSON.stringify({ product: { ...productData }, selectedSize, quantity }))
             navigate(`/checkout/${productId}`)
         }
@@ -63,7 +66,7 @@ const Product = () => {
                         </h1>
                         <div className="productPrice">
                             <p className="proRePrice">&#2547; {productData.price}</p>
-                            <p className="proDisPrice">&#2547; {productData.disPrice}</p>
+                            <p className="proDisPrice">&#2547; {productData.wholePrice}</p>
                         </div>
                         <div className="productDes">
                             <p>
@@ -84,15 +87,18 @@ const Product = () => {
 
                         <div className="disTable">
                             <div className="disTabHeading">
-                                <div className="disTabItem">Quantity</div>
+                                <div className="disTabItem">Min Quantity</div>
                                 {/* <div className="disTabItem">Discount (%)</div> */}
                                 <div className="disTabItem">Price</div>
                             </div>
-                            <div className={quantity > productData.wholeMinQuan - 1 ? "disTabRow" : "disTabRow active"}>
-                                <div className="disTabItem">1 - {productData.wholeMinQuan - 1}</div>
-                                {/* <div className="disTabItem">--</div> */}
-                                <div className="disTabItem">&#2547; {productData.disPrice}</div>
-                            </div>
+                            {
+                                productData.disPrice && productData.disPrice > 0 &&
+                                <div className={quantity > productData.wholeMinQuan - 1 ? "disTabRow" : "disTabRow active"}>
+                                    <div className="disTabItem">1 - {productData.wholeMinQuan - 1}</div>
+                                    {/* <div className="disTabItem">--</div> */}
+                                    <div className="disTabItem">&#2547; {productData.disPrice}</div>
+                                </div>
+                            }
                             <div className={quantity < productData.wholeMinQuan ? "disTabRow" : "disTabRow active"}>
                                 <div className="disTabItem">{productData.wholeMinQuan}+</div>
                                 {/* <div className="disTabItem">30 %</div> */}

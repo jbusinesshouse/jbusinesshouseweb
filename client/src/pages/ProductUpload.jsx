@@ -17,9 +17,10 @@ const ProductUpload = () => {
   const [weight, setWeight] = useState(0)
   const [image, setImage] = useState(null)
   const [price, setPrice] = useState(0)
-  const [disPrice, setDisPrice] = useState(0)
   const [wholeMinQuan, setWholeMinQuan] = useState(0)
   const [wholePrice, setWholePrice] = useState(0)
+  const [hasDis, setHasDis] = useState(false)
+  const [disPrice, setDisPrice] = useState(0)
   const [storeId, setStoreId] = useState("")
 
 
@@ -53,7 +54,8 @@ const ProductUpload = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (name && description && category !== "select" && weight > 0 && image && price > 0 && disPrice > 0 && wholeMinQuan > 0 && wholePrice > 0 && storeId) {
+
+    if (name && description && category !== "select" && weight > 0 && image && price > 0 && wholeMinQuan > 0 && wholePrice > 0 && hasDis && disPrice > 0 && storeId) {
       setIsLoading(true)
       const fileExtension = image.name.split('.').pop();
       const currentDate = new Date();
@@ -63,6 +65,29 @@ const ProductUpload = () => {
 
       axios.post(`${process.env.REACT_APP_API_KEY}/uploadImage`, imageFile).then(res => {
         axios.post(`${process.env.REACT_APP_API_KEY}/product/saveProduct`, { name, description, category, size: selectedSize, weight, image: uniqueFilename, price, disPrice, wholeMinQuan, wholePrice, storeId }).then(res => {
+          console.log(res.data);
+          setIsLoading(false)
+          navigate("/")
+        }).catch(err => {
+          setIsLoading(false)
+          window.alert("Something went wrong!")
+          console.log("Product error");
+        })
+      }).catch(err => {
+        setIsLoading(false)
+        window.alert("Something went wrong!")
+        console.log("Image error");
+      })
+    } else if (name && description && category !== "select" && weight > 0 && image && price > 0 && wholeMinQuan > 0 && wholePrice > 0 && !hasDis && storeId) {
+      setIsLoading(true)
+      const fileExtension = image.name.split('.').pop();
+      const currentDate = new Date();
+      const uniqueFilename = `${image.name.split('.')[0]}-${currentDate.getTime()}.${fileExtension}`;
+      const imageFile = new FormData()
+      imageFile.append("image", image, uniqueFilename)
+
+      axios.post(`${process.env.REACT_APP_API_KEY}/uploadImage`, imageFile).then(res => {
+        axios.post(`${process.env.REACT_APP_API_KEY}/product/saveProduct`, { name, description, category, size: selectedSize, weight, image: uniqueFilename, price, wholeMinQuan, wholePrice, storeId }).then(res => {
           console.log(res.data);
           setIsLoading(false)
           navigate("/")
@@ -158,10 +183,6 @@ const ProductUpload = () => {
               <label htmlFor="price">Product price</label>
               <input type="number" name="price" id="price" value={price} onChange={e => setPrice(e.target.value)} />
             </div>
-            <div className="proUpInp">
-              <label htmlFor="disPrice">Discounted price</label>
-              <input type="number" name="disPrice" id="disPrice" value={disPrice} onChange={e => setDisPrice(e.target.value)} />
-            </div>
 
             <div className="wholeSalePart">
               <div className="proUpInp">
@@ -173,6 +194,17 @@ const ProductUpload = () => {
                 <input type="number" name="wholePrice" id="wholePrice" value={wholePrice} onChange={e => setWholePrice(e.target.value)} />
               </div>
             </div>
+            <div className="disCon">
+              <input type="checkbox" name='disCheck' id='disCheck' value={hasDis} onChange={e => setHasDis(e.target.checked)} />
+              <label htmlFor="disCheck">Add single product discount</label>
+            </div>
+            {
+              hasDis &&
+              <div className="proUpInp">
+                <label htmlFor="disPrice">Discounted price</label>
+                <input type="number" name="disPrice" id="disPrice" value={disPrice} onChange={e => setDisPrice(e.target.value)} />
+              </div>
+            }
             <button type='submit'>Upload Product</button>
           </form>
         </div>

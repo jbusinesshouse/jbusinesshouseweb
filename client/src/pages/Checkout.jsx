@@ -31,7 +31,10 @@ const Checkout = () => {
         setSize(getStoredProduct.selectedSize)
         setQuantity(getStoredProduct.quantity)
         setProduct(getStoredProduct.product)
-        setFinalPrice((getStoredProduct.product?.hasWholesale ? Number(getStoredProduct.quantity) < Number(getStoredProduct.product?.wholeMinQuan) ? Number(getStoredProduct.product?.disPrice) : Number(getStoredProduct.product?.wholePrice) : Number(getStoredProduct.product?.disPrice)) * Number(getStoredProduct.quantity))
+        const mainProduct = getStoredProduct.product
+        // setFinalPrice((getStoredProduct.product?.hasWholesale ? Number(getStoredProduct.quantity) < Number(getStoredProduct.product?.wholeMinQuan) ? Number(getStoredProduct.product?.disPrice) : Number(getStoredProduct.product?.wholePrice) : Number(getStoredProduct.product?.disPrice)) * Number(getStoredProduct.quantity))
+        const getFinalPrice = mainProduct?.disPrice && mainProduct?.disPrice > 0 && getStoredProduct?.quantity < mainProduct?.wholeMinQuan ? mainProduct?.disPrice : mainProduct?.wholePrice
+        setFinalPrice(getFinalPrice * getStoredProduct.quantity)
     }, [])
 
 

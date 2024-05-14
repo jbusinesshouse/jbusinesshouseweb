@@ -78,13 +78,13 @@
 }
 
 
-.wholeSaleCon {
+.disCon {
     display: flex;
     align-items: center;
     margin-bottom: 30px;
 }
 
-.wholeSaleCon input {
+.disCon input {
     width: 20px;
     height: 20px;
     margin-right: 10px;

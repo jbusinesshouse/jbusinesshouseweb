@@ -13,7 +13,7 @@ const SingleProduct = ({ data }) => {
                 <h3>{data.name}</h3>
                 <div className="priceWrap">
                     <p className="mainPrice">&#2547; {data.price}</p>
-                    <p className="disPrice">&#2547; {data.disPrice}</p>
+                    <p className="disPrice">&#2547; {data.wholePrice}</p>
                 </div>
             </div>
         </Link>

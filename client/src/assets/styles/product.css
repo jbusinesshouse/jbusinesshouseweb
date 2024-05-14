@@ -90,6 +90,9 @@
     border: 1px solid #dfdfdf;
     display: flex;
 }
+.disTabHeading .disTabItem {
+    font-size: 13px;
+}
 .disTabRow.active {
     background-color: #96598a;
 }
