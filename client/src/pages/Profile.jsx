@@ -19,7 +19,7 @@ const Profile = () => {
         setUserData(userVal)
         if (userVal) {
             axios.get(`${process.env.REACT_APP_API_KEY}/product/getByStore?id=${userVal._id}`).then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 const revData = res.data.reverse()
                 setUserProduct(revData)
             }).catch(err => {
@@ -39,7 +39,7 @@ const Profile = () => {
             setUserProduct(filteredProducts)
             setIsLoading(false)
         }).catch(err => {
-            console.log(err);
+            // console.log(err);
             setIsLoading(false)
             window.alert('Something went wrong!')
         })

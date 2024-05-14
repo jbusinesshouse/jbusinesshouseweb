@@ -45,16 +45,16 @@ const Shop = () => {
     const [itemOffset, setItemOffset] = useState(0);
 
     const endOffset = itemOffset + 12;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     const currentItems = products.slice(itemOffset, endOffset);
     const pageCount = Math.ceil(products.length / 12);
 
     // Invoke when user click to request another page.
     const handlePageClick = (event) => {
         const newOffset = (event.selected * 12) % products.length;
-        console.log(
-            `User requested page number ${event.selected}, which is offset ${newOffset}`
-        );
+        // console.log(
+        //     `User requested page number ${event.selected}, which is offset ${newOffset}`
+        // );
         setItemOffset(newOffset);
     };
 

@@ -19,7 +19,7 @@ const Login = () => {
         if (phone && password) {
             setIsLoading(true)
             axios.post(`${process.env.REACT_APP_API_KEY}/auth/validate`, { phone, password }).then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 setIsLoading(false)
                 localStorage.setItem("user", JSON.stringify(res.data))
                 setUserVal(res.data)
@@ -27,7 +27,7 @@ const Login = () => {
                 navigate("/")
             }).catch(err => {
                 logout()
-                console.log(err);
+                // console.log(err);
                 setIsLoading(false)
                 window.alert("Something went wrong!")
             })

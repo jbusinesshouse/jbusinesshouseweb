@@ -32,7 +32,7 @@ const Signup = () => {
             axios.post(`${process.env.REACT_APP_API_KEY}/uploadImage`, imageFile).then(res => {
                 if (email) {
                     axios.post(`${process.env.REACT_APP_API_KEY}/user/saveUser`, { name, phone, email, storeName, storeAddress, storePhoto: uniqueFilename, password }).then(res => {
-                        console.log(res.data);
+                        // console.log(res.data);
                         setIsLoading(false)
                         localStorage.setItem("user", JSON.stringify(res.data))
                         setUserVal(res.data)
@@ -46,7 +46,7 @@ const Signup = () => {
                     })
                 } else {
                     axios.post(`${process.env.REACT_APP_API_KEY}/user/saveUser`, { name, phone, storeName, storeAddress, storePhoto: uniqueFilename, password }).then(res => {
-                        console.log(res.data);
+                        // console.log(res.data);
                         setIsLoading(false)
                         localStorage.setItem("user", JSON.stringify(res.data))
                         setUserVal(res.data)

@@ -65,7 +65,7 @@ const ProductUpload = () => {
 
       axios.post(`${process.env.REACT_APP_API_KEY}/uploadImage`, imageFile).then(res => {
         axios.post(`${process.env.REACT_APP_API_KEY}/product/saveProduct`, { name, description, category, size: selectedSize, weight, image: uniqueFilename, price, disPrice, wholeMinQuan, wholePrice, storeId }).then(res => {
-          console.log(res.data);
+          // console.log(res.data);
           setIsLoading(false)
           navigate("/")
         }).catch(err => {
@@ -88,7 +88,7 @@ const ProductUpload = () => {
 
       axios.post(`${process.env.REACT_APP_API_KEY}/uploadImage`, imageFile).then(res => {
         axios.post(`${process.env.REACT_APP_API_KEY}/product/saveProduct`, { name, description, category, size: selectedSize, weight, image: uniqueFilename, price, wholeMinQuan, wholePrice, storeId }).then(res => {
-          console.log(res.data);
+          // console.log(res.data);
           setIsLoading(false)
           navigate("/")
         }).catch(err => {

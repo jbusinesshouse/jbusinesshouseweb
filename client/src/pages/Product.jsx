@@ -19,7 +19,7 @@ const Product = () => {
             behavior: 'smooth'
         });
         axios.get(`${process.env.REACT_APP_API_KEY}/product/getSingle/${productId}`).then(res => {
-            console.log(res.data);
+            // console.log(res.data);
             setProductData(res.data)
         }).catch(err => {
             console.log(err);

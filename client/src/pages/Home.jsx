@@ -27,7 +27,7 @@ const Home = () => {
       setFeatured(revFeatured)
       setIsLoading(false)
     }).catch(err => {
-      console.log(err);
+      // console.log(err);
       setIsLoading(false)
     })
   }, [])

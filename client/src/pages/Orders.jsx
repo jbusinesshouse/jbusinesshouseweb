@@ -16,7 +16,7 @@ const Orders = () => {
             axios.get(`${process.env.REACT_APP_API_KEY}/order/getOrdersByStoreId/${userVal._id}`).then(res => {
                 setIsLoading(false)
                 const revData = res.data.reverse()
-                console.log(revData);
+                // console.log(revData);
                 setOrderData(revData)
             }).catch(err => {
                 console.log(err);
@@ -34,7 +34,7 @@ const Orders = () => {
             })
             setOrderData(updatedOrder)
         }).catch(err => {
-            console.log(err);
+            // console.log(err);
             setIsLoading(false)
             window.alert('Something went wrong!')
         })

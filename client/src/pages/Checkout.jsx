@@ -26,7 +26,7 @@ const Checkout = () => {
     useEffect(() => {
         const getStoredProduct = JSON.parse(localStorage.getItem("selectedProduct"))
         setProductData(getStoredProduct)
-        console.log(getStoredProduct);
+        // console.log(getStoredProduct);
         // setDeliveryCharge(100)
         setSize(getStoredProduct.selectedSize)
         setQuantity(getStoredProduct.quantity)
@@ -47,7 +47,7 @@ const Checkout = () => {
             }).catch(err => {
                 setIsLoading(false)
                 window.alert('Something went wrong!')
-                console.log(err);
+                // console.log(err);
             })
         }
     }
