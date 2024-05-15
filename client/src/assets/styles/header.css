@@ -61,6 +61,26 @@ header .container {
 .headerBtns button img {
     height: 25px;
 }
+button.logoutBtn {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+button.logoutBtn.menuLogout {
+    display: none;
+    margin-left: 0;
+}
+button.logoutBtn img {
+    height: 25px;
+    margin-left: 10px;
+}
 
 
 .headerBtns a {
@@ -175,6 +195,12 @@ header .container {
     }
     .headerBtns .menuIcon {
         display: block;
+    }
+    button.logoutBtn.mainLogout {
+        display: none;
+    }
+    button.logoutBtn.menuLogout {
+        display: flex;
     }
 
 

@@ -55,7 +55,7 @@ const ProductUpload = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    if (name && description && category !== "select" && weight > 0 && image && price > 0 && wholeMinQuan > 0 && wholePrice > 0 && hasDis && disPrice > 0 && storeId) {
+    if (name && description && category !== "select" && selectedSize.length > 0 && weight > 0 && image && price > 0 && wholeMinQuan > 0 && wholePrice > 0 && hasDis && disPrice > 0 && storeId) {
       setIsLoading(true)
       const fileExtension = image.name.split('.').pop();
       const currentDate = new Date();
@@ -78,7 +78,7 @@ const ProductUpload = () => {
         window.alert("Something went wrong!")
         console.log("Image error");
       })
-    } else if (name && description && category !== "select" && weight > 0 && image && price > 0 && wholeMinQuan > 0 && wholePrice > 0 && !hasDis && storeId) {
+    } else if (name && description && category !== "select" && selectedSize.length > 0 && weight > 0 && image && price > 0 && wholeMinQuan > 0 && wholePrice > 0 && !hasDis && storeId) {
       setIsLoading(true)
       const fileExtension = image.name.split('.').pop();
       const currentDate = new Date();
