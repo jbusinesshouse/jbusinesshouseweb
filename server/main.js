@@ -13,7 +13,7 @@ const app = express()
 
 app.use(express.json())
 app.use(cors({
-    origin: ['https://jbusinesshouse.com', 'https://www.jbusinesshouse.com', 'https://admin.jbusinesshouse.com', 'https://www.adin.jbusinesshouse.com'],
+    origin: ['https://jbusinesshouse.com', 'https://www.jbusinesshouse.com', 'https://admin.jbusinesshouse.com', 'https://www.admin.jbusinesshouse.com'],
     methods: 'GET,POST,PUT,DELETE'
 }))
 dotenv.config()
