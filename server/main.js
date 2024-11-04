@@ -12,7 +12,10 @@ const fs = require("fs");
 const app = express()
 
 app.use(express.json())
-app.use(cors({ origin: "*" }))
+app.use(cors({
+    origin: ['https://jbusinesshouse.com', 'https://www.jbusinesshouse.com', 'https://admin.jbusinesshouse.com', 'https://www.adin.jbusinesshouse.com'],
+    methods: 'GET,POST,PUT,DELETE'
+}))
 dotenv.config()
 
 // Configure multer storage with folder creation logic
