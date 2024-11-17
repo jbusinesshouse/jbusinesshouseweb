@@ -3,12 +3,13 @@ import '../assets/styles/product.css'
 import Header from '../components/Header'
 import product1 from '../assets/images/panjabi1.jpeg'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Product = () => {
     const [productData, setProductData] = useState({})
     const [quantity, setQuantity] = useState(1)
     const [selectedSize, setSelectedSize] = useState("")
+    const [storeInfo, setStoreInfo] = useState({})
     const productId = window.location.pathname.split("/product/")[1]
 
     const navigate = useNavigate()
@@ -24,6 +25,7 @@ const Product = () => {
             if (res.status === 200) {
                 axios.get(`${process.env.REACT_APP_API_KEY}/user/getUser/${res.data.storeId}`).then(res => {
                     console.log(res.data);
+                    setStoreInfo(res.data)
                 })
             }
         }).catch(err => {
@@ -66,6 +68,13 @@ const Product = () => {
                         <img src={`${process.env.REACT_APP_API_KEY}/uploads/${productData.image}`} alt="" width="500" />
                     </div>
                     <div className="productRight">
+                        <Link to={`/seller/${storeInfo.id}`}>
+                            <div className="proStore">
+                                <img src={`${process.env.REACT_APP_API_KEY}/uploads/${storeInfo.storePhoto}`} alt="" />
+                                <h3>{storeInfo.storeName}</h3>
+                            </div>
+                        </Link>
+
                         <h1>
                             {productData.name}
                         </h1>

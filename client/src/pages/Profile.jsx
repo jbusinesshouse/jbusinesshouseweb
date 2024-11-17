@@ -15,7 +15,9 @@ const Profile = () => {
     const [userProduct, setUserProduct] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [profileWran, setProfileWarn] = useState(false)
+    const [tooltipVisible, setTooltipVisible] = useState(false);
     const { userVal } = useContext(AuthContext)
+
     useEffect(() => {
         setUserData(userVal)
         if (userVal) {
@@ -49,6 +51,21 @@ const Profile = () => {
             window.alert('Something went wrong!')
         })
     }
+
+
+    const handleCopyLink = () => {
+        const storeUrl = `https://jbusinesshouse.com/seller/${userData._id}`;
+        navigator.clipboard.writeText(storeUrl).then(() => {
+            setTooltipVisible(true);
+            setTimeout(() => {
+                setTooltipVisible(false);
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+    };
+
+
     return (
         <div className='profile'>
             <Header />
@@ -58,14 +75,22 @@ const Profile = () => {
             <section className="profileWrap">
                 <div className="container">
                     {profileWran ?
-                        <h2>Login to see details!</h2> :
+                        <h2 style={{ textAlign: "center" }}>Login to see details!</h2> :
                         <>
                             <div className="profileTop">
                                 <img src={`${process.env.REACT_APP_API_KEY}/uploads/${userData?.storePhoto}`} alt="" className="storeImg" />
                                 <h2>{userData?.storeName}</h2>
                             </div>
                             <div className="profileInfo">
-                                <h3>Your personal Information</h3>
+                                <div className="profileInfoHeading">
+                                    <h3>Your personal Information</h3>
+                                    <div className="profileLinkCopy">
+                                        <button className="copyLinkButton" onClick={handleCopyLink}>
+                                            Copy store link
+                                        </button>
+                                        {tooltipVisible && <div className="copyTooltip">URL copied successfully!</div>}
+                                    </div>
+                                </div>
                                 <div className="proInfoRow">
                                     <h4>Full name</h4>
                                     <p>{userData?.name}</p>

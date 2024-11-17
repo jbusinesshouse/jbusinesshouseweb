@@ -21,16 +21,45 @@
     padding-left: 15px;
 }
 
+
+
+.proStore {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.proStore img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid #1346af;
+    object-fit: cover;
+    display: block;
+    margin-right: 5px;
+}
+.proStore h3 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+
+
+
 .productRight h1 {
     font-size: 25px;
     font-weight: 500;
     margin-bottom: 10px;
 }
 
+
+
+
+
 .productPrice {
     display: flex;
     align-items: center;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
 }
 .productPrice p {
     font-size: 25px;
@@ -170,6 +199,8 @@
     color: #8f8f8f;
     margin-right: 15px;
 }
+
+
 
 
 
