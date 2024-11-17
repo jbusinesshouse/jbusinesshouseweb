@@ -13,6 +13,8 @@ import Orders from './pages/Orders';
 import { AuthProvider } from './context/AuthContext';
 import ThankYou from './pages/ThankYou';
 import Search from './pages/Search';
+import SellerProfile from './pages/SellerProfile';
+import NotFound from './pages/NotFound';
 
 
 function App() {
@@ -29,9 +31,12 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
             <Route path='/profile' element={<Profile />} />
+            <Route path='/profile/:id' element={<SellerProfile />} />
             <Route path='/product-upload' element={<ProductUpload />} />
             <Route path='/orders/:id' element={<Orders />} />
             <Route path='/thank-you' element={<ThankYou />} />
+            <Route path='/not-found' element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
         <Footer />

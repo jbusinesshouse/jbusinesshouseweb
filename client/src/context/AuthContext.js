@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
         if (localStorage.getItem("user")) {
             const userLocalVal = JSON.parse(localStorage.getItem("user"))
             axios.post(`${process.env.REACT_APP_API_KEY}/auth/validate`, { phone: userLocalVal.phone, password: userLocalVal.password }).then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 setUserVal(res.data)
                 setIsAuthenticated(true)
             }).catch(err => {

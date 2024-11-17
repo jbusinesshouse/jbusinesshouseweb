@@ -22,19 +22,21 @@ const Shop = () => {
 
         setIsLoading(true)
         axios.get(`${process.env.REACT_APP_API_KEY}/product/getProducts`).then(res => {
-            // const revData = res.data.reverse()
+            const revData = res.data.reverse()
             // Generate an array of indices
-            let indices = Array.from({ length: res.data.length }, (_, i) => i);
+            // let indices = Array.from({ length: res.data.length }, (_, i) => i);
             // Shuffle indices
-            for (let i = indices.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [indices[i], indices[j]] = [indices[j], indices[i]];
-            }
+            // for (let i = indices.length - 1; i > 0; i--) {
+            //     const j = Math.floor(Math.random() * (i + 1));
+            //     [indices[i], indices[j]] = [indices[j], indices[i]];
+            // }
             // Create a new array using shuffled indices
-            const shuffledArray = indices.map(index => res.data[index]);
-            setReservedProducts(shuffledArray);
+            // const shuffledArray = indices.map(index => res.data[index]);
+            // setReservedProducts(shuffledArray);
+            setReservedProducts(revData)
 
-            setProducts(shuffledArray)
+            // setProducts(shuffledArray)
+            setProducts(revData)
             setIsLoading(false)
         }).catch(err => {
             console.log(err);

@@ -1,9 +1,10 @@
 .banner {
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(../images/hero-bg.png);
+    /* background-image: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(../images/banner-high-res.png); */
+    background-image: url(../images/banner-high-res.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    padding: 160px 0;
+    padding: 300px 0;
 }
 
 .bannerText {
@@ -39,11 +40,13 @@
 
 
 
-.featured, .allProducts {
+.featured,
+.allProducts {
     padding: 60px 0;
 }
 
-.featured h2, .allProducts h2 {
+.featured h2,
+.allProducts h2 {
     font-size: 30px;
     font-weight: 400;
     margin-bottom: 30px;
@@ -90,10 +93,14 @@
         font-size: 47px;
         line-height: 1.1em;
     }
-    .featured, .allProducts {
+
+    .featured,
+    .allProducts {
         padding: 25px 0;
     }
-    .featured h2, .allProducts h2 {
+
+    .featured h2,
+    .allProducts h2 {
         font-size: 24px;
     }
 }

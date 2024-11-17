@@ -39,7 +39,7 @@ const Home = () => {
       }
       <Header />
       <section className="banner">
-        <div className="container">
+        {/* <div className="container">
           <div className="bannerText">
             <h3>Exclusive Collections</h3>
             <h1>
@@ -47,7 +47,7 @@ const Home = () => {
             </h1>
             <Link to={'/shop'}>Shop Now</Link>
           </div>
-        </div>
+        </div> */}
       </section>
 
       <section className="featured">
