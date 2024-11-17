@@ -1,6 +1,7 @@
 .singleProduct {
-    width: calc(100% / 4 - 25px);
-    margin-bottom: 20px;
+    width: 100%;
+    /* width: calc(100% / 4 - 13px); */
+    /* margin-bottom: 20px; */
 }
 
 .productImg {
@@ -53,7 +54,7 @@
 
 
 
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
     .singleProduct {
         width: calc(100% / 3 - 25px);
     }
@@ -63,7 +64,7 @@
     .singleProduct {
         width: calc(100% / 2 - 10px);
     }
-}
+} */
 
 @media (max-width: 550px) {
     .productImg {

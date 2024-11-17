@@ -50,7 +50,7 @@ const Home = () => {
         </div> */}
       </section>
 
-      <section className="featured">
+      {/* <section className="featured">
         <div className="container">
           <h2>Featured Products</h2>
           <div className="productWrap">
@@ -61,7 +61,7 @@ const Home = () => {
             }
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section className="allProducts">
         <div className="container">

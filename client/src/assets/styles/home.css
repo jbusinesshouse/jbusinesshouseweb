@@ -54,10 +54,14 @@
 
 
 .productWrap {
-    display: flex;
+    /* display: flex;
     align-items: flex-start;
+    gap: 25px;
     justify-content: space-between;
-    flex-wrap: wrap;
+    flex-wrap: wrap; */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
 }
 
 
@@ -82,6 +86,10 @@
     .banner {
         padding: 120px 0;
     }
+
+    .productWrap {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 @media (max-width: 700px) {
@@ -102,5 +110,11 @@
     .featured h2,
     .allProducts h2 {
         font-size: 24px;
+    }
+
+
+    .productWrap {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
     }
 }
