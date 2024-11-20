@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    refNumber: {
+        type: String,
+        required: false,
+    },
     isAdmin: {
         type: Boolean,
         default: false,
