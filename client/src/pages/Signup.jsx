@@ -14,6 +14,7 @@ const Signup = () => {
     const [storeAddress, setStoreAddress] = useState("")
     const [storePhoto, setStorePhoto] = useState(null)
     const [password, setPassword] = useState("")
+    const [refNumber, setRefNumber] = useState("")
 
     const [isLoading, setIsLoading] = useState(false)
     const { setUserVal, login, logout } = useContext(AuthContext)
@@ -29,35 +30,31 @@ const Signup = () => {
             const uniqueFilename = `${storePhoto.name.split('.')[0]}-${currentDate.getTime()}.${fileExtension}`;
             const imageFile = new FormData()
             imageFile.append("image", storePhoto, uniqueFilename)
+            const formattedValue = {
+                name,
+                phone,
+                ...(email ? { email } : {}),
+                storeName,
+                storeAddress,
+                storePhoto,
+                uniqueFilename,
+                password,
+                ...(refNumber ? { refNumber } : {})
+            }
             axios.post(`${process.env.REACT_APP_API_KEY}/uploadImage`, imageFile).then(res => {
-                if (email) {
-                    axios.post(`${process.env.REACT_APP_API_KEY}/user/saveUser`, { name, phone, email, storeName, storeAddress, storePhoto: uniqueFilename, password }).then(res => {
-                        // console.log(res.data);
-                        setIsLoading(false)
-                        localStorage.setItem("user", JSON.stringify(res.data))
-                        setUserVal(res.data)
-                        login()
-                        navigate("/")
-                    }).catch(err => {
-                        logout()
-                        console.log(err);
-                        setIsLoading(false)
-                        window.alert("Something went wrong! Try using a different phone number!")
-                    })
-                } else {
-                    axios.post(`${process.env.REACT_APP_API_KEY}/user/saveUser`, { name, phone, storeName, storeAddress, storePhoto: uniqueFilename, password }).then(res => {
-                        // console.log(res.data);
-                        setIsLoading(false)
-                        localStorage.setItem("user", JSON.stringify(res.data))
-                        setUserVal(res.data)
-                        login()
-                        navigate("/")
-                    }).catch(err => {
-                        console.log(err);
-                        setIsLoading(false)
-                        window.alert("Something went wrong! Try using a different phone number!")
-                    })
-                }
+                axios.post(`${process.env.REACT_APP_API_KEY}/user/saveUser`, formattedValue).then(res => {
+                    // console.log(res.data);
+                    setIsLoading(false)
+                    localStorage.setItem("user", JSON.stringify(res.data))
+                    setUserVal(res.data)
+                    login()
+                    navigate("/")
+                }).catch(err => {
+                    logout()
+                    console.log(err);
+                    setIsLoading(false)
+                    window.alert("Something went wrong! Try using a different phone number!")
+                })
             }).catch(err => {
                 console.log(err);
             })
@@ -78,23 +75,23 @@ const Signup = () => {
                     <form onSubmit={handleSubmit}>
                         <div className="signInpItem">
                             <label htmlFor="name">Enter your full name</label>
-                            <input type="text" name='name' id='name' onChange={e => setName(e.target.value)} />
+                            <input type="text" name='name' id='name' value={name} onChange={e => setName(e.target.value)} />
                         </div>
                         <div className="signInpItem">
                             <label htmlFor="phone">Enter your phone number</label>
-                            <input type="text" name='phone' id='phone' onChange={e => setPhone(e.target.value)} />
+                            <input type="text" name='phone' id='phone' value={phone} onChange={e => setPhone(e.target.value)} />
                         </div>
                         <div className="signInpItem">
                             <label htmlFor="email">Enter your email (optional)</label>
-                            <input type="text" name='email' id='email' onChange={e => setEmail(e.target.value)} />
+                            <input type="text" name='email' id='email' value={email} onChange={e => setEmail(e.target.value)} />
                         </div>
                         <div className="signInpItem">
                             <label htmlFor="store">Enter your store name</label>
-                            <input type="text" name='store' id='store' onChange={e => setStoreName(e.target.value)} />
+                            <input type="text" name='store' id='store' value={storeName} onChange={e => setStoreName(e.target.value)} />
                         </div>
                         <div className="signInpItem">
                             <label htmlFor="storeAdd">Enter your store address</label>
-                            <input type="text" name='storeAdd' id='storeAdd' onChange={e => setStoreAddress(e.target.value)} />
+                            <input type="text" name='storeAdd' id='storeAdd' value={storeAddress} onChange={e => setStoreAddress(e.target.value)} />
                         </div>
                         <div className="signInpItem signInpImgItem">
                             <label htmlFor="storeImg">Enter your store photo</label>
@@ -102,7 +99,11 @@ const Signup = () => {
                         </div>
                         <div className="signInpItem">
                             <label htmlFor="password">Enter your password</label>
-                            <input type="text" name='password' id='password' onChange={e => setPassword(e.target.value)} />
+                            <input type="text" name='password' id='password' value={password} onChange={e => setPassword(e.target.value)} />
+                        </div>
+                        <div className="signInpItem">
+                            <label htmlFor="refNumber">Enter referral number (optional)</label>
+                            <input type="text" name='refNumber' id='refNumber' value={refNumber} onChange={e => setRefNumber(e.target.value)} />
                         </div>
                         <button>Signup</button>
                     </form>

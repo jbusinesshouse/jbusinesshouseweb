@@ -46,11 +46,11 @@ const Login = () => {
                     <form onSubmit={handleSubmit}>
                         <div className="logInpItem">
                             <label htmlFor="phone">Enter your phone number</label>
-                            <input type="text" name='phone' id='phone' onChange={e => setPhone(e.target.value)} />
+                            <input type="text" name='phone' id='phone' value={phone} onChange={e => setPhone(e.target.value)} />
                         </div>
                         <div className="logInpItem">
                             <label htmlFor="password">Enter your password</label>
-                            <input type="password" name='password' id='password' onChange={e => setPassword(e.target.value)} />
+                            <input type="password" name='password' id='password' value={password} onChange={e => setPassword(e.target.value)} />
                         </div>
                         <button>Login</button>
                     </form>
