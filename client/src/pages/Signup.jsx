@@ -36,28 +36,30 @@ const Signup = () => {
                 ...(email ? { email } : {}),
                 storeName,
                 storeAddress,
-                storePhoto,
+                storePhoto: uniqueFilename,
                 uniqueFilename,
                 password,
                 ...(refNumber ? { refNumber } : {})
             }
-            axios.post(`${process.env.REACT_APP_API_KEY}/uploadImage`, imageFile).then(res => {
-                axios.post(`${process.env.REACT_APP_API_KEY}/user/saveUser`, formattedValue).then(res => {
-                    // console.log(res.data);
-                    setIsLoading(false)
-                    localStorage.setItem("user", JSON.stringify(res.data))
-                    setUserVal(res.data)
-                    login()
-                    navigate("/")
-                }).catch(err => {
-                    logout()
-                    console.log(err);
-                    setIsLoading(false)
-                    window.alert("Something went wrong! Try using a different phone number!")
-                })
-            }).catch(err => {
-                console.log(err);
-            })
+            console.log(formattedValue);
+            
+            // axios.post(`${process.env.REACT_APP_API_KEY}/uploadImage`, imageFile).then(res => {
+            //     axios.post(`${process.env.REACT_APP_API_KEY}/user/saveUser`, formattedValue).then(res => {
+            //         // console.log(res.data);
+            //         setIsLoading(false)
+            //         localStorage.setItem("user", JSON.stringify(res.data))
+            //         setUserVal(res.data)
+            //         login()
+            //         navigate("/")
+            //     }).catch(err => {
+            //         logout()
+            //         console.log(err);
+            //         setIsLoading(false)
+            //         window.alert("Something went wrong! Try using a different phone number!")
+            //     })
+            // }).catch(err => {
+            //     console.log(err);
+            // })
         } else {
             window.alert("Please fill in all requried fields!")
         }
