@@ -41,7 +41,6 @@ const Signup = () => {
                 password,
                 ...(refNumber ? { refNumber } : {})
             }
-            console.log(formattedValue);
 
             axios.post(`${process.env.REACT_APP_API_KEY}/uploadImage`, imageFile).then(res => {
                 axios.post(`${process.env.REACT_APP_API_KEY}/user/saveUser`, formattedValue).then(res => {
