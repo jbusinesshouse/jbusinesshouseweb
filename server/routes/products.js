@@ -17,21 +17,31 @@ router.post("/saveProduct", async (req, res) => {
 // Get products with pagination
 router.get("/getProducts", async (req, res) => {
     try {
-        const { page = 1, limit = 30 } = req.query; // Default to page 1 and limit 30
-        const skip = (page - 1) * limit; // Skip records for pagination
+        const { page = 1, limit = 30 } = req.query;
+        const skip = (page - 1) * limit;
 
-        const products = await Product.find()
-            .skip(skip)
-            .limit(Number(limit));
+        
+        const seenProducts = req.query.seenProducts ? req.query.seenProducts.split(",") : [];
 
-        const totalProducts = await Product.countDocuments(); // Get total count for checking if there are more products
-        const hasMore = totalProducts > skip + products.length; // If total products are more than the skip + current length, we have more to fetch
+        // Randomize and exclude seen products
+        const products = await Product.aggregate([
+            { $match: { _id: { $nin: seenProducts.map(id => mongoose.Types.ObjectId(id)) } } },
+            { $sample: { size: skip + Number(limit) } },
+            { $skip: skip },
+            { $limit: Number(limit) }
+        ]);
 
+        const totalProducts = await Product.countDocuments();
+        const hasMore = totalProducts > skip + products.length;
+
+        
         res.status(200).json({ products, hasMore });
+
     } catch (err) {
         res.status(500).json(err);
     }
 });
+
 
 
 // Existing routes for product search, update, delete, etc.
