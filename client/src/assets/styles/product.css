@@ -14,7 +14,7 @@
 .productLeft img {
     width: 100%;
     height: 720px;
-    object-fit: cover;
+    object-fit: contain;
 }
 .productRight {
     width: 50%;

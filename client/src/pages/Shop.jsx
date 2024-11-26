@@ -1,122 +1,94 @@
-import React, { useEffect, useState } from 'react'
-import ReactPaginate from 'react-paginate';
-import Header from '../components/Header'
-import '../assets/styles/shop.css'
-import SingleProduct from '../components/SingleProduct'
+import React, { useEffect, useState } from 'react';
+import Header from '../components/Header';
+import '../assets/styles/shop.css';
+import SingleProduct from '../components/SingleProduct';
 import axios from 'axios';
 import Loading from '../components/Loading';
+import { useInView } from 'react-intersection-observer';
 
-
-
-const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 const Shop = () => {
-    const [reservedProducts, setReservedProducts] = useState([])
-    const [products, setProducts] = useState([])
-    const [category, setCategory] = useState("all")
-    const [isLoading, setIsLoading] = useState(false)
-    useEffect(() => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+    const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
 
-        setIsLoading(true)
-        axios.get(`${process.env.REACT_APP_API_KEY}/product/getProducts`).then(res => {
-            const revData = res.data.reverse()
-            // Generate an array of indices
-            // let indices = Array.from({ length: res.data.length }, (_, i) => i);
-            // Shuffle indices
-            // for (let i = indices.length - 1; i > 0; i--) {
-            //     const j = Math.floor(Math.random() * (i + 1));
-            //     [indices[i], indices[j]] = [indices[j], indices[i]];
-            // }
-            // Create a new array using shuffled indices
-            // const shuffledArray = indices.map(index => res.data[index]);
-            // setReservedProducts(shuffledArray);
-            setReservedProducts(revData)
-
-            // setProducts(shuffledArray)
-            setProducts(revData)
-            setIsLoading(false)
-        }).catch(err => {
-            console.log(err);
-            setIsLoading(false)
-        })
-    }, [])
-
-    const [itemOffset, setItemOffset] = useState(0);
-
-    const endOffset = itemOffset + 12;
-    // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    const currentItems = products.slice(itemOffset, endOffset);
-    const pageCount = Math.ceil(products.length / 12);
-
-    // Invoke when user click to request another page.
-    const handlePageClick = (event) => {
-        const newOffset = (event.selected * 12) % products.length;
-        // console.log(
-        //     `User requested page number ${event.selected}, which is offset ${newOffset}`
-        // );
-        setItemOffset(newOffset);
+    const fetchProducts = (pageNumber) => {
+        setIsLoading(true);
+        axios
+            .get(`${process.env.REACT_APP_API_KEY}/product/getProducts`, {
+                params: { page: pageNumber, limit: 30 } // Fetch 30 products per page
+            })
+            .then((res) => {
+                const { products: newProducts, hasMore: newHasMore } = res.data;
+                if (newProducts.length > 0) {
+                    setProducts((prevProducts) => [...prevProducts, ...newProducts]);
+                    setHasMore(newHasMore); // Update whether more products are available
+                } else {
+                    setHasMore(false); // No more products to load
+                }
+                setIsLoading(false);
+            })
+            .catch((err) => {
+                console.error(err);
+                setIsLoading(false);
+            });
     };
 
-    const handleCategory = (val) => {
-        setCategory(val)
-        if (val === "all") {
-            setProducts(reservedProducts)
-        } else {
-            const filteredVal = reservedProducts.filter(item => {
-                return item.category === val
-            })
-            setProducts(filteredVal)
-        }
-    }
+    useEffect(() => {
+        fetchProducts(page);
+    }, [page]);
 
+    const { ref, inView } = useInView({
+        triggerOnce: false,
+        threshold: 0.1,
+    });
+
+    useEffect(() => {
+        if (inView && hasMore) {
+            setPage((prevPage) => prevPage + 1); // Increment page when the user scrolls to the bottom
+        }
+    }, [inView]);
 
     return (
         <div className='shop'>
             <Header />
-            {
-                isLoading &&
-                <Loading />
-            }
+            {isLoading && <Loading />}
+
             <section className="shopProducts">
                 <div className="container">
                     <div className="shopHeading">
-                        <h3>Showing {products.length} results</h3>
-                        <select value={category} onChange={e => handleCategory(e.target.value)}>
-                            <option value="all">All</option>
-                            <option value="panjabi">Panjabi</option>
-                            <option value="shirt">Shirt</option>
-                            <option value="pant">Pant</option>
-                            <option value="others">Others</option>
-                        </select>
+                        <h3>Showing all products</h3>
                     </div>
                     <div className="productWrap">
-                        {
-                            currentItems.map((val, i) => {
-                                return <SingleProduct data={val} key={i} />
-                            })
-                        }
+                        {products.map((val, i) => (
+                            <ScrollReveal key={i}>
+                                <SingleProduct data={val} />
+                            </ScrollReveal>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            <section className="paginationWrap">
-                <div className="container">
-                    <ReactPaginate
-                        breakLabel="..."
-                        nextLabel=">"
-                        onPageChange={handlePageClick}
-                        pageRangeDisplayed={5}
-                        pageCount={pageCount}
-                        previousLabel="<"
-                        renderOnZeroPageCount={null}
-                    />
+            {hasMore && (
+                <div ref={ref} className="loading-more">
+                    {isLoading ? <Loading /> : 'Load more...'}
                 </div>
-            </section>
+            )}
         </div>
-    )
-}
+    );
+};
 
-export default Shop
+const ScrollReveal = ({ children }) => {
+    const { ref, inView } = useInView({
+        triggerOnce: true,
+        threshold: 0.2,
+    });
+
+    return (
+        <div ref={ref} className={`reveal-item ${inView ? 'visible' : ''}`}>
+            {children}
+        </div>
+    );
+};
+
+export default Shop;
