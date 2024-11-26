@@ -18,7 +18,7 @@ const Home = () => {
 
     setIsLoading(true)
     axios.get(`${process.env.REACT_APP_API_KEY}/product/getProducts`).then(res => {
-      const revData = res.data.reverse()
+      const revData = res.data.products.reverse()
       const revFeatured = revData.filter(val => {
         return val.isFeatured
       })

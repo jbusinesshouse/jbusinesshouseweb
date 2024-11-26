@@ -16,15 +16,15 @@ const Shop = () => {
         setIsLoading(true);
         axios
             .get(`${process.env.REACT_APP_API_KEY}/product/getProducts`, {
-                params: { page: pageNumber, limit: 30 } // Fetch 30 products per page
+                params: { page: pageNumber, limit: 30 }
             })
             .then((res) => {
                 const { products: newProducts, hasMore: newHasMore } = res.data;
                 if (newProducts.length > 0) {
                     setProducts((prevProducts) => [...prevProducts, ...newProducts]);
-                    setHasMore(newHasMore); // Update whether more products are available
+                    setHasMore(newHasMore);
                 } else {
-                    setHasMore(false); // No more products to load
+                    setHasMore(false);
                 }
                 setIsLoading(false);
             })
