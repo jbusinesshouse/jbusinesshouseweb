@@ -11,11 +11,11 @@ const productSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        required: true,
+        required: false,
     },
     size: {
         type: Array,
-        required: true,
+        required: false,
     },
     weight: {
         type: Number,

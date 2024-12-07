@@ -50,11 +50,11 @@ const Product = () => {
     }
 
     const handleBuy = () => {
-        if (selectedSize && productData.disPrice && productData.disPrice > 0) {
-            localStorage.setItem("selectedProduct", JSON.stringify({ product: { ...productData }, selectedSize, quantity }))
+        if (productData.disPrice && productData.disPrice > 0) {
+            localStorage.setItem("selectedProduct", JSON.stringify({ product: { ...productData }, selectedSize: selectedSize ? selectedSize : "N/A", quantity }))
             navigate(`/checkout/${productId}`)
-        } else if (selectedSize && quantity >= productData.wholeMinQuan) {
-            localStorage.setItem("selectedProduct", JSON.stringify({ product: { ...productData }, selectedSize, quantity }))
+        } else if (quantity >= productData.wholeMinQuan) {
+            localStorage.setItem("selectedProduct", JSON.stringify({ product: { ...productData }, selectedSize: selectedSize ? selectedSize : "N/A", quantity }))
             navigate(`/checkout/${productId}`)
         }
     }
@@ -92,7 +92,7 @@ const Product = () => {
                             <h3>SIZE</h3>
                             <ul>
                                 {
-                                    productData.size && productData.size.map((val, i) => {
+                                    productData.size && productData.size.length > 0 && productData.size.map((val, i) => {
                                         return <li key={i} onClick={() => setSelectedSize(val)} className={val === selectedSize ? "active" : ""}>{val}</li>
                                     })
                                 }
@@ -130,7 +130,7 @@ const Product = () => {
                         </div>
 
                         <div className="proCat">
-                            <span>Category:</span> <p>{productData.category}</p>
+                            <span>Category:</span> <p>{productData.category ? productData.category : "N/A"}</p>
                         </div>
                     </div>
                 </div>

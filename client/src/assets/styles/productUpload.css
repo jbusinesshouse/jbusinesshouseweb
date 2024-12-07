@@ -25,6 +25,9 @@
     display: block;
     margin-bottom: 5px;
 }
+.proUpInp label span {
+    color: red;
+}
 
 .proUpInp input, .proUpInp select {
     width: 100%;
@@ -32,6 +35,34 @@
     padding: 0 15px;
     border: 1px solid #dadada;
     outline: none;
+}
+
+.proUpInp .proUpSizeTog {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.proUpInp .proUpSizeTog button {
+    width: 110px;
+    height: 40px;
+    background-color: transparent;
+    color: #000;
+    font-size: 14px;
+    /* font-weight: 500; */
+    border: 1px solid #015866;
+    border-radius: 10px;
+}
+.proUpInp .proUpSizeTog button:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.proUpInp .proUpSizeTog button:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.proUpInp .proUpSizeTog button.active {
+    background-color: #015866;
+    color: #fff;
 }
 
 .proUpInp textarea {
@@ -102,4 +133,17 @@
     background-color: #1346af;
     color: #fff;
     font-size: 17px;
+}
+
+
+
+
+.mustInp {
+    color: #8f8f8f;
+    display: block;
+    margin-top: 10px;
+}
+.mustInp span {
+    color: red;
+    font-size: 18px;
 }

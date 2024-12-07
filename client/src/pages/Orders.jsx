@@ -60,7 +60,7 @@ const Orders = () => {
                                             <h4><span>Buyer:</span> {val.name}</h4>
                                             <h4><span>Phone:</span> {val.phone}</h4>
                                             <p><span>Size:</span> {val.size}</p>
-                                            <p><span>qty:</span> {val.quantity}</p>
+                                            <p><span>Qty:</span> {val.quantity}</p>
                                             <p><span>Total Price:</span> &#2547; {val.finalPrice}</p>
                                         </div>
                                         <div className="orderCompleted">

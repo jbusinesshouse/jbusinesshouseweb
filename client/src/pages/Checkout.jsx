@@ -49,6 +49,9 @@ const Checkout = () => {
                 window.alert('Something went wrong!')
                 // console.log(err);
             })
+        } else {
+            setIsLoading(false)
+            window.alert("Please fill in all shipping information fields!")
         }
     }
 
