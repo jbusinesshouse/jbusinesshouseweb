@@ -12,6 +12,7 @@ const fs = require("fs");
 const app = express()
 
 app.use(express.json())
+app.use(express.urlencoded({ limit: "50mb", extended: true }))
 app.use(cors({
     origin: ['https://jbusinesshouse.com', 'https://www.jbusinesshouse.com', 'https://admin.jbusinesshouse.com', 'https://www.admin.jbusinesshouse.com', 'http://localhost:3000'],
     methods: 'GET,POST,PUT,DELETE'
@@ -32,7 +33,10 @@ const storage = multer.diskStorage({
     },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 50 * 1024 * 1024 }
+});
 
 mongoose.connect(process.env.MONGO_URI).then(() => console.log("MongoDB connected successfully!"))
     .catch((err) => console.error("MongoDB connection failed:", err));
