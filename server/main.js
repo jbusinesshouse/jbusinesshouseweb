@@ -11,7 +11,7 @@ const fs = require("fs");
 
 const app = express()
 
-app.use(express.json())
+app.use(express.json({ limit: "50mb" }))
 app.use(express.urlencoded({ limit: "50mb", extended: true }))
 app.use(cors({
     origin: ['https://jbusinesshouse.com', 'https://www.jbusinesshouse.com', 'https://admin.jbusinesshouse.com', 'https://www.admin.jbusinesshouse.com', 'http://localhost:3000'],
@@ -54,6 +54,10 @@ app.post("/uploadImage", upload.single("image"), (req, res) => {
             return res.status(400).json({ message: "No image file uploaded" });
         }
 
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
         // Return the filename of the uploaded image
         res.status(200).json({ filename: req.file.filename });
     } catch (err) {
@@ -66,6 +70,10 @@ app.post("/uploadImages", upload.array("subImages", 5), (req, res) => {
         if (!req.files || req.files.length === 0) {
             return res.status(400).json({ message: "No images uploaded" });
         }
+
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
         // Extract filenames (already set from frontend)
         const uploadedFiles = req.files.map((file) => file.filename);
