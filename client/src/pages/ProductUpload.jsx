@@ -12,11 +12,13 @@ const ProductUpload = () => {
   const [sizeType, setSizeType] = useState("letter")
   const [selectedSize, setSelectedSize] = useState([])
   const [preImg, setPreImg] = useState(null)
+  const [preMultiImg, setPreMultiImg] = useState([])
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [category, setCategory] = useState("")
   const [weight, setWeight] = useState(0)
   const [image, setImage] = useState(null)
+  const [subImages, setSubImages] = useState([])
   const [price, setPrice] = useState(0)
   const [wholeMinQuan, setWholeMinQuan] = useState(0)
   const [wholePrice, setWholePrice] = useState(0)
@@ -62,61 +64,97 @@ const ProductUpload = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    if (name && description && weight > 0 && image && price > 0 && wholeMinQuan > 0 && wholePrice > 0 && hasDis && disPrice > 0 && storeId) {
-      setIsLoading(true)
-      const fileExtension = image.name.split('.').pop();
-      const currentDate = new Date();
-      const uniqueFilename = `${image.name.split('.')[0]}-${currentDate.getTime()}.${fileExtension}`;
-      const imageFile = new FormData()
-      imageFile.append("image", image, uniqueFilename)
-
-      axios.post(`${process.env.REACT_APP_API_KEY}/uploadImage`, imageFile).then(res => {
-        axios.post(`${process.env.REACT_APP_API_KEY}/product/saveProduct`, { name, description, category: (category ? category : ""), size: selectedSize, weight, image: uniqueFilename, price, disPrice, wholeMinQuan, wholePrice, storeId }).then(res => {
-          // console.log(res.data);
-          setIsLoading(false)
-          navigate("/")
-        }).catch(err => {
-          setIsLoading(false)
-          window.alert("Something went wrong!")
-          console.log("Product save error");
-        })
-      }).catch(err => {
-        setIsLoading(false)
-        window.alert("Something went wrong!")
-        console.log("Image save error");
-      })
-    } else if (name && description && weight > 0 && image && price > 0 && wholeMinQuan > 0 && wholePrice > 0 && !hasDis && storeId) {
-      setIsLoading(true)
-      const fileExtension = image.name.split('.').pop();
-      const currentDate = new Date();
-      const uniqueFilename = `${image.name.split('.')[0]}-${currentDate.getTime()}.${fileExtension}`;
-      const imageFile = new FormData()
-      imageFile.append("image", image, uniqueFilename)
-
-      axios.post(`${process.env.REACT_APP_API_KEY}/uploadImage`, imageFile).then(res => {
-        axios.post(`${process.env.REACT_APP_API_KEY}/product/saveProduct`, { name, description, category: (category ? category : ""), size: selectedSize, weight, image: uniqueFilename, price, wholeMinQuan, wholePrice, storeId }).then(res => {
-          // console.log(res.data);
-          setIsLoading(false)
-          navigate("/")
-        }).catch(err => {
-          setIsLoading(false)
-          window.alert("Something went wrong!")
-          console.log("Product save error");
-        })
-      }).catch(err => {
-        setIsLoading(false)
-        window.alert("Something went wrong!")
-        console.log("Image save error");
-      })
-    } else {
-      window.alert("Please fill in all required fields!")
+  const handleSubImageChage = (e) => {
+    setPreMultiImg([])
+    const files = e.target.files
+    if (files.length > 5) {
+      e.target.value = ""
+      return window.alert("You can upload upto 5 images!")
     }
-    // console.log({ name, description, category, size: selectedSize, weight, price, disPrice, wholeMinQuan, wholePrice, storeId });
-
+    for (let i = 0; i < files.length; i++) {
+      const item = files[i];
+      setPreMultiImg(prev => [...prev, URL.createObjectURL(item)])
+    }
+    setSubImages(files)
   }
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (
+      name &&
+      description &&
+      weight > 0 &&
+      image &&
+      price > 0 &&
+      wholeMinQuan > 0 &&
+      wholePrice > 0 &&
+      storeId
+    ) {
+      setIsLoading(true);
+
+      try {
+        // Create unique filename for main image
+        const fileExtension = image.name.split(".").pop();
+        const uniqueFilename = `${image.name.split(".")[0]}-${Date.now()}.${fileExtension}`;
+
+        // Create FormData for main image
+        const imageFile = new FormData();
+        imageFile.append("image", image, uniqueFilename);
+
+        // Upload main image
+        await axios.post(`${process.env.REACT_APP_API_KEY}/uploadImage`, imageFile);
+
+        let newSubImages = [];
+        let subFormData = new FormData();
+
+        // Upload subImages only if there are any
+        if (subImages.length > 0) {
+          for (let i = 0; i < subImages.length; i++) {
+            const item = subImages[i];
+            const subFileExtension = item.name.split(".").pop();
+            const subUniqueFilename = `${item.name.split(".")[0]}-${Date.now()}.${subFileExtension}`;
+
+            subFormData.append("subImages", item, subUniqueFilename);
+            newSubImages.push(subUniqueFilename);
+          }
+
+          await axios.post(`${process.env.REACT_APP_API_KEY}/uploadImages`, subFormData);
+        }
+
+        // Prepare product data
+        const productData = {
+          name,
+          description,
+          category: category || "",
+          size: selectedSize,
+          weight,
+          image: uniqueFilename,
+          subImages: newSubImages, // Only send if there are subImages
+          price,
+          wholeMinQuan,
+          wholePrice,
+          storeId,
+        };
+
+        if (hasDis && disPrice > 0) productData.disPrice = disPrice;
+
+        // Save product
+        await axios.post(`${process.env.REACT_APP_API_KEY}/product/saveProduct`, productData);
+
+        setIsLoading(false);
+        navigate("/");
+      } catch (err) {
+        setIsLoading(false);
+        window.alert("Something went wrong!");
+        console.error(err);
+      }
+    } else {
+      window.alert("Please fill in all required fields!");
+    }
+  };
+
 
   return (
     <div className='productUpload'>
@@ -200,10 +238,26 @@ const ProductUpload = () => {
               <input type="number" name="weight" id="weight" value={weight} onChange={e => setWeight(e.target.value)} />
             </div>
             <div className="proUpInp proUpImgInp">
-              <label htmlFor="image">Product image <span>*</span></label>
+              <label htmlFor="image">Product main image <span>*</span></label>
               <input type="file" name="image" id="image" accept='image/*' onChange={e => handleImageChange(e)} />
               {
                 preImg && <img src={preImg} alt="" className='proPrevImg' />
+              }
+            </div>
+            <div className="proUpInp proUpImgInp">
+              <label htmlFor="image">Product extra images - upto 5</label>
+              <input type="file" name="subimage" id="subimage" accept='image/*' multiple onChange={e => handleSubImageChage(e)} />
+
+              {
+                preMultiImg.length > 0 && (
+                  <div className="proPrevMultiImgWrap">
+                    {
+                      preMultiImg.map((url, i) => {
+                        return <img src={url} alt="" className='proPrevMultiImg' key={i} />
+                      })
+                    }
+                  </div>
+                )
               }
             </div>
             <div className="proUpInp">

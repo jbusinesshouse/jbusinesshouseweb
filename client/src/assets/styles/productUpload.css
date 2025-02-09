@@ -108,6 +108,18 @@
     display: block;
 }
 
+.proPrevMultiImgWrap {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+.proPrevMultiImgWrap img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
 
 .disCon {
     display: flex;

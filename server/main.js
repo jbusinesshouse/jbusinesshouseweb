@@ -57,6 +57,21 @@ app.post("/uploadImage", upload.single("image"), (req, res) => {
     }
 });
 
+app.post("/uploadImages", upload.array("subImages", 5), (req, res) => {
+    try {
+        if (!req.files || req.files.length === 0) {
+            return res.status(400).json({ message: "No images uploaded" });
+        }
+
+        // Extract filenames (already set from frontend)
+        const uploadedFiles = req.files.map((file) => file.filename);
+
+        res.status(200).json({ filenames: uploadedFiles });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 
 app.use("/user", userRoute)
 app.use("/auth", authRoute)
